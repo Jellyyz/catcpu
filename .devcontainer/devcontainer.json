@@ -1,0 +1,12 @@
+{
+    "name": "RISC-V CPU Lab",
+    "build": { "dockerfile": "Dockerfile" },
+    "extensions": [
+        "mcusak.vscode-rtl",      // Verilog support
+        "ms-python.python",       // For cocotb testbenches
+        "donjayamanne.gitsvg"     // To see git history visually
+    ],
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    }
+}
