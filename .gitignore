@@ -1,0 +1,5 @@
+# Exclude generated HDL files
+hdl/gen/
+
+# Exclude Icarus Verilog simulation files
+hdl/sim_iv

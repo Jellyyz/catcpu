@@ -1,34 +1,42 @@
 `timescale 1ns / 1ps
 
 module tb_catcpu;
-    // Clock signal
+    // Clock and reset signals
     logic clk;
-    
+    logic nreset;
+
     // Instantiate the DUT (Device Under Test)
-    catcpu_if cpu_if (.clk(clk));
-    
     catcpu dut (
-        .clk(clk)
-        // Add other ports as needed
+        .clk(clk),
+        .nreset(nreset)
     );
-    
+
     // Clock generation: 10ns period (100MHz)
     initial begin
         clk = 0;
         forever #5 clk = ~clk;
     end
-    
+
+    // Reset generation
+    initial begin
+        nreset = 0;  // Assert reset
+        #20;         // Hold reset for 20ns
+        nreset = 1;  // Deassert reset
+    end
+
     // Test stimulus
     initial begin
-        // Enable waveform tracing
-        $dumpfile("sim.vcd");
-        $dumpvars(0, tb_catcpu);
-        
-        // Run simulation for 100 cycles (1000ns)
-        #1000;
-        
+        $dumpfile("../hdl/gen/icarus_out.vcd");
+        $dumpvars();
+
+        // Wait for reset to complete
+        @(posedge nreset);
+
+        // Run simulation for 1000 cycles (10000ns) after reset
+        #10000;
+
         // Exit simulation
         $finish;
     end
-    
+
 endmodule

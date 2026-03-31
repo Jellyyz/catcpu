@@ -1,5 +1,5 @@
 {
-    "name": "RISC-V CPU Lab",
+    "name": "OOO Superscaler RISC-V CPU",
     "build": { "dockerfile": "Dockerfile" },
     "extensions": [
         "mcusak.vscode-rtl",      // Verilog support
